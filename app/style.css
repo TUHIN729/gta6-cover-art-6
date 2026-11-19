@@ -1,0 +1,123 @@
+/* Leonida Polaroid Press — warm paper, neon ink, postcard chrome. */
+* { box-sizing: border-box; }
+:root {
+  --paper: #f6ead6;
+  --paper-dim: #efe0c6;
+  --ink: #241a2e;
+  --ink-soft: #5a4a63;
+  --pink: #ff2e88;
+  --orange: #ff7a1a;
+  --teal: #0ec5c5;
+  --violet: #7b2fff;
+  --card: #fff8ec;
+  --line: #d9c8a8;
+}
+html, body { margin: 0; padding: 0; }
+body {
+  background:
+    radial-gradient(1100px 500px at 85% -10%, rgba(255, 46, 136, .16), transparent 60%),
+    radial-gradient(900px 480px at -10% 110%, rgba(14, 197, 197, .14), transparent 60%),
+    var(--paper);
+  color: var(--ink);
+  font-family: "Trebuchet MS", "Segoe UI", Verdana, sans-serif;
+  min-height: 100vh;
+}
+.topbar {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 12px; padding: 16px 22px;
+  border-bottom: 3px solid var(--ink);
+  background: linear-gradient(90deg, #ffe9f3, #fff3d6 55%, #dff7f3);
+}
+.brand { display: flex; align-items: center; gap: 14px; }
+.brand-mark {
+  width: 52px; height: 52px; flex: none; display: grid; place-items: center;
+  background: var(--ink); color: #ffd23e; font-weight: 900; font-size: 22px;
+  letter-spacing: 1px; border-radius: 8px; transform: rotate(-4deg);
+  box-shadow: 3px 3px 0 var(--pink);
+}
+.brand h1 { margin: 0; font-size: 26px; letter-spacing: .5px; text-transform: uppercase; }
+.brand p { margin: 2px 0 0; color: var(--ink-soft); font-size: 13px; }
+.top-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.workspace {
+  display: grid; grid-template-columns: 340px minmax(0, 1fr); gap: 20px;
+  padding: 20px 22px; align-items: start;
+}
+.panel {
+  background: var(--card); border: 2px solid var(--ink); border-radius: 14px;
+  padding: 16px 18px; box-shadow: 6px 6px 0 rgba(36, 26, 46, .9);
+}
+.panel h2 {
+  margin: 16px 0 8px; font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.panel h2:first-child { margin-top: 0; }
+.chip-row { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip {
+  border: 2px solid var(--ink); background: #fff; color: var(--ink);
+  border-radius: 999px; padding: 6px 11px; font: inherit; font-size: 13px;
+  cursor: pointer; box-shadow: 2px 2px 0 var(--ink);
+}
+.chip:hover { transform: translateY(-1px); }
+.chip[aria-pressed="true"] { background: var(--ink); color: #ffd23e; }
+.chip .swatch {
+  display: inline-block; width: 12px; height: 12px; border-radius: 50%;
+  margin-right: 6px; vertical-align: -1px; border: 1px solid rgba(0,0,0,.35);
+}
+.field { display: block; margin: 8px 0; font-size: 13px; color: var(--ink-soft); }
+.field input[type="text"], .field select {
+  display: block; width: 100%; margin-top: 4px; padding: 8px 10px;
+  border: 2px solid var(--ink); border-radius: 8px; background: #fff;
+  font: inherit; color: var(--ink);
+}
+.field input[type="range"] { width: 100%; accent-color: var(--pink); }
+.hint { font-size: 12.5px; color: var(--ink-soft); margin: 4px 0 6px; line-height: 1.45; }
+.btn {
+  border: 2px solid var(--ink); background: #fff; color: var(--ink);
+  border-radius: 10px; padding: 9px 14px; font: inherit; font-weight: 700;
+  cursor: pointer; box-shadow: 3px 3px 0 var(--ink);
+}
+.btn:hover { transform: translateY(-1px); }
+.btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--ink); }
+.btn:disabled { opacity: .45; cursor: default; transform: none; }
+.btn.accent { background: linear-gradient(135deg, var(--pink), var(--orange)); color: #fff; }
+.btn.wide { width: 100%; }
+.export-row { display: grid; grid-template-columns: 1fr; gap: 8px; }
+.status { font-size: 13px; color: var(--ink-soft); min-height: 1.2em; margin: 10px 0 0; }
+
+.stage-wrap { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.stage-frame {
+  background: #2b2133; border: 2px solid var(--ink); border-radius: 16px;
+  padding: 18px; box-shadow: 8px 8px 0 rgba(36, 26, 46, .9);
+  width: max-content; max-width: 100%;
+}
+#stage {
+  display: block; width: min(72vh, 100%); height: auto; border-radius: 4px;
+  background: #111; touch-action: none; cursor: grab;
+}
+#stage.dragging { cursor: grabbing; }
+.stage-hint { font-size: 13px; color: var(--ink-soft); text-align: center; margin: 0; }
+.foot {
+  padding: 12px 22px 20px; font-size: 12.5px; color: var(--ink-soft); text-align: center;
+}
+
+/* Screenshot modes: the cover alone, centred on a dark backdrop. */
+body.shot-cover, body.shot-portrait, body.shot-sheet { background: #17101d; }
+body.shot-cover .topbar, body.shot-cover .panel, body.shot-cover .foot,
+body.shot-portrait .topbar, body.shot-portrait .panel, body.shot-portrait .foot,
+body.shot-sheet .topbar, body.shot-sheet .panel, body.shot-sheet .foot { display: none; }
+body.shot-cover .workspace, body.shot-portrait .workspace, body.shot-sheet .workspace {
+  display: flex; padding: 0; min-height: 100vh; align-items: center; justify-content: center;
+}
+body.shot-cover .stage-wrap, body.shot-portrait .stage-wrap, body.shot-sheet .stage-wrap { width: 100%; }
+body.shot-cover .stage-frame, body.shot-portrait .stage-frame, body.shot-sheet .stage-frame {
+  border: none; box-shadow: none; padding: 0; background: transparent; border-radius: 0;
+}
+body.shot-cover .stage-hint, body.shot-portrait .stage-hint, body.shot-sheet .stage-hint { display: none; }
+body.shot-cover #stage, body.shot-sheet #stage { width: 100vmin; height: 100vmin; }
+body.shot-portrait #stage { width: auto; height: 100vh; }
+
+@media (max-width: 900px) {
+  .workspace { grid-template-columns: 1fr; }
+  #stage { width: 100%; }
+}

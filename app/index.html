@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leonida Polaroid Press — GTA 6 Cover Maker</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">LP</span>
+    <div>
+      <h1>Leonida Polaroid Press</h1>
+      <p>Postcard covers for Grand Theft Auto VI — no photos needed, every scene drawn in the browser.</p>
+    </div>
+  </div>
+  <div class="top-actions">
+    <button id="shuffleBtn" type="button" class="btn accent">Shuffle the deck</button>
+    <button id="undoBtn" type="button" class="btn">Undo</button>
+    <button id="redoBtn" type="button" class="btn">Redo</button>
+  </div>
+</header>
+
+<main class="workspace">
+  <section class="panel" aria-label="Cover controls">
+    <h2>Layout</h2>
+    <div id="layoutRow" class="chip-row" role="group" aria-label="Layout"></div>
+
+    <h2>Colour grade</h2>
+    <div id="gradeRow" class="chip-row" role="group" aria-label="Colour grade"></div>
+
+    <h2>Words</h2>
+    <label class="field">Title
+      <input id="titleInput" type="text" maxlength="24" value="LEONIDA">
+    </label>
+    <label class="field">Subtitle
+      <input id="subtitleInput" type="text" maxlength="40" value="GRAND THEFT AUTO VI">
+    </label>
+    <label class="field">Handwritten caption
+      <input id="captionInput" type="text" maxlength="48" value="Sunset Heist">
+    </label>
+
+    <h2>Photo in the frame</h2>
+    <p class="hint">Click a photo to pick it, then choose its scene. Drag a photo to reframe it; scroll over it to zoom.</p>
+    <div id="sceneRow" class="chip-row" role="group" aria-label="Scene"></div>
+    <label class="field">Tilt
+      <input id="tiltInput" type="range" min="-12" max="12" step="1" value="0">
+    </label>
+
+    <h2>Export</h2>
+    <div class="export-row">
+      <label class="field">Size
+        <select id="sizeSelect">
+          <option value="1080x1080">Square · 1080 × 1080</option>
+          <option value="1080x1350">Portrait · 1080 × 1350</option>
+          <option value="1920x1080">Wide · 1920 × 1080</option>
+        </select>
+      </label>
+      <button id="exportBtn" type="button" class="btn accent wide">Export PNG</button>
+    </div>
+    <p id="status" role="status" class="status">Ready.</p>
+  </section>
+
+  <section class="stage-wrap" aria-label="Cover preview">
+    <div class="stage-frame">
+      <canvas id="stage" width="1080" height="1080" aria-label="The cover preview"></canvas>
+    </div>
+    <p class="stage-hint">Drag a photo to reframe · scroll to zoom · every pixel is drawn locally, nothing leaves your machine.</p>
+  </section>
+</main>
+
+<footer class="foot">
+  <span>Leonida Polaroid Press — a fan-made cover maker. Fully offline; scenes are drawn with code, no photos are fetched.</span>
+</footer>
+
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
